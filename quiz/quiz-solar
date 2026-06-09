@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico de Economia na Conta de Energia</title>
+  <meta name="description" content="Responda ao diagnóstico gratuito e descubra se sua conta de energia possui potencial de redução de custos." />
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1136684233668972');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1136684233668972&ev=PageView&noscript=1" />
+  </noscript>
+
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --text:#172033;
+      --muted:#667085;
+      --primary:#0f9f6e;
+      --primary-dark:#08764f;
+      --soft:#e8f7f1;
+      --border:#dde5ee;
+      --warning:#fff7e6;
+      --warning-border:#ffd88a;
+      --danger:#fff1f0;
+      --danger-border:#ffb3ad;
+      --shadow:0 18px 45px rgba(20,35,60,.12);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(15,159,110,.16), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(21,101,192,.12), transparent 32%),
+        var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .app{
+      width:100%;
+      max-width:860px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(255,255,255,.8);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .topbar{
+      padding:22px 28px;
+      background:linear-gradient(135deg, #073b2b, #0f9f6e);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:-.4px;
+      font-size:18px;
+    }
+
+    .tag{
+      font-size:13px;
+      opacity:.9;
+      border:1px solid rgba(255,255,255,.35);
+      padding:7px 11px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .content{
+      padding:34px;
+    }
+
+    .screen{display:none; animation:fade .22s ease-in-out}
+    .screen.active{display:block}
+
+    @keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:translateY(0)}}
+
+    h1,h2,h3{margin:0 0 14px; line-height:1.15; letter-spacing:-.7px}
+    h1{font-size:38px}
+    h2{font-size:30px}
+    h3{font-size:22px}
+    p{font-size:17px; line-height:1.58; color:var(--muted); margin:0 0 18px}
+
+    .hero-list{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:24px 0 28px;
+    }
+
+    .mini-card{
+      background:var(--soft);
+      border:1px solid rgba(15,159,110,.18);
+      border-radius:16px;
+      padding:15px;
+      font-size:14px;
+      color:#114536;
+      font-weight:700;
+    }
+
+    .progress-wrap{margin-bottom:28px}
+    .progress-info{
+      display:flex;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:8px;
+    }
+    .progress{
+      height:10px;
+      background:#e9eef5;
+      border-radius:99px;
+      overflow:hidden;
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--primary), #58d79f);
+      transition:.25s;
+    }
+
+    .question-title{font-size:28px; margin-bottom:8px}
+    .question-sub{font-size:16px; margin-bottom:22px}
+
+    .options{
+      display:grid;
+      gap:12px;
+    }
+
+    .option{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:16px;
+      padding:17px 18px;
+      cursor:pointer;
+      transition:.18s;
+      font-size:16px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .option:hover{border-color:var(--primary); transform:translateY(-1px); box-shadow:0 8px 20px rgba(15,159,110,.08)}
+    .option.selected{border-color:var(--primary); background:var(--soft)}
+    .option small{display:block; font-weight:400; color:var(--muted); margin-top:4px; line-height:1.35}
+
+    .input-group{margin:22px 0}
+    label{display:block; font-weight:800; margin-bottom:8px}
+    input{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:15px;
+      padding:16px 17px;
+      font-size:17px;
+      outline:none;
+      transition:.18s;
+      background:#fff;
+    }
+    input:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(15,159,110,.12)}
+
+    .actions{
+      display:flex;
+      gap:12px;
+      margin-top:28px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    button,.btn{
+      border:0;
+      background:var(--primary);
+      color:#fff;
+      padding:15px 22px;
+      border-radius:14px;
+      font-weight:800;
+      font-size:16px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      transition:.18s;
+    }
+    button:hover,.btn:hover{background:var(--primary-dark); transform:translateY(-1px)}
+    .btn-secondary{background:#edf2f7; color:#26364c}
+    .btn-secondary:hover{background:#dfe7f1}
+    .btn-full{width:100%; margin-top:12px}
+
+    .notice{
+      border-radius:16px;
+      padding:16px;
+      font-size:15px;
+      line-height:1.5;
+      margin:18px 0;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      color:#475467;
+    }
+
+    .result-head{
+      background:linear-gradient(135deg, #073b2b, #0f9f6e);
+      color:#fff;
+      border-radius:20px;
+      padding:26px;
+      margin-bottom:22px;
+    }
+    .result-head p{color:rgba(255,255,255,.88); margin-bottom:0}
+    .score{
+      display:flex;
+      align-items:end;
+      gap:8px;
+      margin:12px 0;
+    }
+    .score strong{font-size:48px; line-height:1}
+    .score span{font-size:18px; opacity:.85; padding-bottom:7px}
+
+    .diagnosis-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin:18px 0;
+    }
+    .diagnosis-box{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:18px;
+      background:#fff;
+    }
+    .diagnosis-box strong{display:block; margin-bottom:8px; font-size:16px}
+    .diagnosis-box p{font-size:15px; margin:0}
+
+    .objection{
+      background:var(--warning);
+      border:1px solid var(--warning-border);
+      color:#5f4100;
+      border-radius:18px;
+      padding:20px;
+      margin:18px 0;
+    }
+    .objection h3{font-size:20px; margin-bottom:8px}
+    .objection p{color:#5f4100; margin-bottom:0}
+
+    .unlock{
+      border:1px solid rgba(15,159,110,.25);
+      background:var(--soft);
+      border-radius:20px;
+      padding:22px;
+      margin-top:22px;
+    }
+    .unlock p{color:#244b3e}
+
+    .hidden{display:none!important}
+    .error{color:#b42318; font-size:14px; margin-top:8px; display:none}
+    .fineprint{font-size:13px; color:#7b8794; margin-top:14px}
+
+    .loading{
+      text-align:center;
+      padding:46px 10px;
+    }
+    .spinner{
+      width:54px;
+      height:54px;
+      border:5px solid #dceee7;
+      border-top-color:var(--primary);
+      border-radius:50%;
+      animation:spin .8s linear infinite;
+      margin:0 auto 22px;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media(max-width:720px){
+      body{padding:14px; align-items:flex-start}
+      .topbar{padding:18px 20px; flex-direction:column; align-items:flex-start}
+      .content{padding:24px 20px}
+      h1{font-size:30px}
+      h2,.question-title{font-size:24px}
+      .hero-list,.diagnosis-grid{grid-template-columns:1fr}
+      .actions{flex-direction:column-reverse; align-items:stretch}
+      button,.btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="card">
+      <div class="topbar">
+        <div class="brand">Diagnóstico de Economia de Energia</div>
+        <div class="tag">Análise consultiva gratuita</div>
+      </div>
+
+      <div class="content">
+        <div id="startScreen" class="screen active">
+          <h1>Sua conta de energia pode estar mais alta do que deveria.</h1>
+          <p>Responda algumas perguntas rápidas e receba um diagnóstico inicial sobre possíveis oportunidades de redução de custos.</p>
+
+          <div class="hero-list">
+            <div class="mini-card">Sem compromisso</div>
+            <div class="mini-card">Sem promessa genérica</div>
+            <div class="mini-card">Foco na análise da sua conta</div>
+          </div>
+
+          <div class="notice">
+            Este diagnóstico não substitui a análise da fatura. Ele serve para identificar indícios de economia e orientar o próximo passo com mais segurança.
+          </div>
+
+          <div class="input-group">
+            <label for="nameInput">Para começar, qual é o seu nome?</label>
+            <input id="nameInput" type="text" placeholder="Digite seu nome" autocomplete="name" />
+            <div id="nameError" class="error">Digite seu nome para continuar.</div>
+          </div>
+
+          <button onclick="startQuiz()">Começar meu diagnóstico</button>
+        </div>
+
+        <div id="quizScreen" class="screen">
+          <div class="progress-wrap">
+            <div class="progress-info">
+              <span id="progressText">Pergunta 1 de 10</span>
+              <span id="progressPercent">10%</span>
+            </div>
+            <div class="progress"><div id="progressBar"></div></div>
+          </div>
+
+          <h2 id="questionTitle" class="question-title"></h2>
+          <p id="questionSub" class="question-sub"></p>
+          <div id="options" class="options"></div>
+
+          <div class="actions">
+            <button id="backBtn" class="btn-secondary" onclick="prevQuestion()">Voltar</button>
+          </div>
+        </div>
+
+        <div id="loadingScreen" class="screen">
+          <div class="loading">
+            <div class="spinner"></div>
+            <h2>Preparando seu diagnóstico...</h2>
+            <p>Estamos cruzando suas respostas para identificar o melhor próximo passo.</p>
+          </div>
+        </div>
+
+        <div id="resultScreen" class="screen">
+          <div id="resultContent"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const CONFIG = {
+      SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxb1PelY2bvj480VE2h3bvF75f1NY9jE0N8V_yFQjyTzJBMfg_FmjVX7vrkqljpPQdsaw/exec',
+      PIXEL_ID: '1136684233668972',
+      // Troque pelo WhatsApp correto do comercial, somente números com DDI/DDD.
+      WHATSAPP_NUMBER: '5567999999999'
+    };
+
+    const sessionId = localStorage.getItem('energia_quiz_session') || `lead_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+    localStorage.setItem('energia_quiz_session', sessionId);
+
+    let currentQuestion = 0;
+    const lead = {
+      DataHora: new Date().toISOString(),
+      SessaoID: sessionId,
+      Origem: getOrigin(),
+      Nome: '',
+      WhatsApp: '',
+      URL: window.location.href,
+      UserAgent: navigator.userAgent,
+      Score: 0,
+      Temperatura: '',
+      DorPrincipal: '',
+      ObjecaoPrincipal: '',
+      ProdutoRecomendado: '',
+      Diagnostico: ''
+    };
+
+    const questions = [
+      {
+        key:'valor_conta',
+        title:'Qual é o valor médio da sua conta de energia?',
+        sub:'Pode ser uma média aproximada dos últimos meses.',
+        options:[
+          {label:'Até R$ 500', value:'ate_500', points:15},
+          {label:'Entre R$ 500 e R$ 1.000', value:'500_1000', points:35},
+          {label:'Entre R$ 1.000 e R$ 3.000', value:'1000_3000', points:55},
+          {label:'Entre R$ 3.000 e R$ 10.000', value:'3000_10000', points:70},
+          {label:'Acima de R$ 10.000', value:'acima_10000', points:80}
+        ]
+      },
+      {
+        key:'perfil_decisor',
+        title:'Qual é a sua relação com essa conta de energia?',
+        sub:'Isso ajuda a entender como a análise deve ser conduzida.',
+        options:[
+          {label:'Sou dono(a) ou sócio(a)', value:'dono_socio', points:35},
+          {label:'Cuido do financeiro', value:'financeiro', points:25},
+          {label:'Sou administrador(a) ou gerente', value:'administrador', points:20},
+          {label:'Sou contador(a) ou apoio a empresa', value:'contador', points:15},
+          {label:'É uma conta residencial', value:'residencial', points:5}
+        ]
+      },
+      {
+        key:'tipo_imovel',
+        title:'Qual tipo de unidade consome essa energia?',
+        sub:'Alguns perfis costumam ter maior oportunidade de redução.',
+        options:[
+          {label:'Restaurante, mercado ou comércio com refrigeração', value:'comercio_refrigeracao', points:35},
+          {label:'Comércio ou loja', value:'comercio', points:28},
+          {label:'Escritório, clínica ou serviço', value:'servico', points:22},
+          {label:'Indústria, fazenda ou operação produtiva', value:'industria_fazenda', points:32},
+          {label:'Residência', value:'residencia', points:8},
+          {label:'Outro', value:'outro', points:15}
+        ]
+      },
+      {
+        key:'satisfacao_valor',
+        title:'Você está satisfeito(a) com o valor que paga de energia hoje?',
+        sub:'Não precisa saber o motivo ainda. Queremos entender sua percepção.',
+        options:[
+          {label:'Não, considero alto', value:'insatisfeito', points:35, pain:'Conta alta'},
+          {label:'Às vezes acho alto, mas não sei avaliar', value:'duvida', points:25, pain:'Dúvida sobre custo'},
+          {label:'Sim, está dentro do esperado', value:'satisfeito', points:5},
+          {label:'Não sei dizer', value:'nao_sabe', points:18, pain:'Falta de clareza'}
+        ]
+      },
+      {
+        key:'entende_conta',
+        title:'Você entende exatamente como sua conta de energia é calculada?',
+        sub:'Muita gente paga sem conseguir identificar o que realmente está sendo cobrado.',
+        options:[
+          {label:'Não entendo quase nada da conta', value:'nao_entende', points:28, pain:'Não entende a fatura'},
+          {label:'Entendo só o básico', value:'basico', points:22, pain:'Baixa clareza da fatura'},
+          {label:'Entendo bem', value:'entende', points:8},
+          {label:'Outra pessoa cuida disso para mim', value:'terceiro', points:16, pain:'Dependência de terceiro'}
+        ]
+      },
+      {
+        key:'dor_principal',
+        title:'O que mais incomoda você hoje quando olha para sua conta de energia?',
+        sub:'Escolha a opção que mais se aproxima da sua realidade.',
+        options:[
+          {label:'A conta aumenta sem explicação', value:'aumenta_sem_explicacao', points:30, pain:'Conta varia sem explicação'},
+          {label:'Tenho dificuldade de prever o valor do próximo mês', value:'sem_previsibilidade', points:26, pain:'Falta de previsibilidade'},
+          {label:'Não sei se estou pagando corretamente', value:'cobranca_duvidosa', points:32, pain:'Dúvida sobre cobrança'},
+          {label:'A energia pesa muito no orçamento', value:'pesa_orcamento', points:35, pain:'Peso no orçamento'},
+          {label:'Nada disso me incomoda hoje', value:'sem_dor', points:0}
+        ]
+      },
+      {
+        key:'historico_solucoes',
+        title:'Você já buscou alguma forma de reduzir os custos com energia?',
+        sub:'Essa resposta nos ajuda a entender seu momento e evitar uma abordagem genérica.',
+        options:[
+          {label:'Nunca busquei', value:'nunca', points:18},
+          {label:'Já recebi propostas, mas não avancei', value:'propostas_nao_avancei', points:25, objection:'Falta de confiança ou clareza'},
+          {label:'Já contratei uma solução e não gostei', value:'experiencia_ruim', points:28, objection:'Experiência ruim anterior'},
+          {label:'Tenho contrato ativo atualmente', value:'contrato_ativo', points:12, objection:'Já possui solução ativa'},
+          {label:'Já tenho energia solar própria', value:'solar_propria', points:18}
+        ]
+      },
+      {
+        key:'preocupacao',
+        title:'Qual é sua maior preocupação quando alguém fala em economia na conta de energia?',
+        sub:'Não queremos empurrar nada. Queremos entender o que precisa ficar claro para você.',
+        options:[
+          {label:'Tenho medo de promessa que não se cumpre', value:'promessa_nao_cumpre', points:20, objection:'Medo de promessa não cumprida'},
+          {label:'Tenho receio de cobrança escondida', value:'cobranca_escondida', points:20, objection:'Medo de cobrança escondida'},
+          {label:'Não confio muito nesse mercado', value:'desconfianca_mercado', points:22, objection:'Desconfiança no mercado'},
+          {label:'Já tive dor de cabeça antes', value:'dor_cabeca_antes', points:22, objection:'Experiência ruim anterior'},
+          {label:'Não tenho grandes preocupações', value:'sem_preocupacao', points:8}
+        ]
+      },
+      {
+        key:'solucao_atual',
+        title:'Você possui alguma solução de energia atualmente?',
+        sub:'Ter energia solar ou outro contrato não elimina a possibilidade de análise.',
+        options:[
+          {label:'Não tenho nenhuma solução', value:'nenhuma', points:30},
+          {label:'Tenho energia solar própria', value:'solar_propria', points:20},
+          {label:'Tenho energia por assinatura', value:'assinatura', points:8},
+          {label:'Tenho solar própria e algum contrato de energia', value:'ambas', points:5},
+          {label:'Não sei informar', value:'nao_sei', points:14}
+        ]
+      },
+      {
+        key:'solar_conta_alta',
+        title:'Mesmo com a solução atual, sua conta ainda parece alta?',
+        sub:'Se você não tem solução atual, responda pensando na sua conta hoje.',
+        options:[
+          {label:'Sim, ainda parece alta', value:'sim_alta', points:35, pain:'Solução atual insuficiente'},
+          {label:'Às vezes', value:'as_vezes', points:24, pain:'Possível instabilidade'},
+          {label:'Não sei avaliar', value:'nao_sei', points:18, pain:'Falta de clareza'},
+          {label:'Não, está bem resolvida', value:'resolvida', points:0}
+        ]
+      },
+      {
+        key:'acesso_fatura',
+        title:'Você consegue enviar uma conta de energia recente para análise?',
+        sub:'A análise real só pode ser confirmada olhando a fatura.',
+        options:[
+          {label:'Sim, consigo enviar agora', value:'agora', points:40},
+          {label:'Consigo enviar ainda hoje', value:'hoje', points:32},
+          {label:'Preciso pedir para outra pessoa', value:'pedir_terceiro', points:18},
+          {label:'Não tenho acesso no momento', value:'sem_acesso', points:5}
+        ]
+      }
+    ];
+
+    function getOrigin(){
+      const params = new URLSearchParams(window.location.search);
+      return params.get('utm_source') || params.get('origem') || document.referrer || 'direto';
+    }
+
+    function showScreen(id){
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function startQuiz(){
+      const name = document.getElementById('nameInput').value.trim();
+      if(!name){
+        document.getElementById('nameError').style.display = 'block';
+        return;
+      }
+      document.getElementById('nameError').style.display = 'none';
+      lead.Nome = name;
+      sendLeadUpdate('nome_capturado');
+      showScreen('quizScreen');
+      renderQuestion();
+    }
+
+    function renderQuestion(){
+      const q = questions[currentQuestion];
+      document.getElementById('questionTitle').textContent = `${lead.Nome.split(' ')[0]}, ${q.title.charAt(0).toLowerCase()}${q.title.slice(1)}`;
+      document.getElementById('questionSub').textContent = q.sub || '';
+      const total = questions.length;
+      const percent = Math.round(((currentQuestion + 1) / total) * 100);
+      document.getElementById('progressText').textContent = `Pergunta ${currentQuestion + 1} de ${total}`;
+      document.getElementById('progressPercent').textContent = `${percent}%`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+      document.getElementById('backBtn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+
+      const options = document.getElementById('options');
+      options.innerHTML = '';
+      q.options.forEach(opt => {
+        const div = document.createElement('div');
+        div.className = 'option' + (lead[q.key] === opt.value ? ' selected' : '');
+        div.innerHTML = `<span>${opt.label}${opt.help ? `<small>${opt.help}</small>` : ''}</span><span>›</span>`;
+        div.onclick = () => selectOption(q, opt);
+        options.appendChild(div);
+      });
+    }
+
+    function selectOption(q, opt){
+      lead[q.key] = opt.value;
+      lead[`${q.key}_label`] = opt.label;
+      if(opt.pain) lead.DorPrincipal = opt.pain;
+      if(opt.objection) lead.ObjecaoPrincipal = opt.objection;
+      sendLeadUpdate(`resposta_${q.key}`);
+
+      setTimeout(() => {
+        if(currentQuestion < questions.length - 1){
+          currentQuestion++;
+          renderQuestion();
+        }else{
+          finishQuiz();
+        }
+      }, 120);
+    }
+
+    function prevQuestion(){
+      if(currentQuestion > 0){
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    function finishQuiz(){
+      const result = calculateResult();
+      Object.assign(lead, result);
+      sendLeadUpdate('diagnostico_gerado');
+      showScreen('loadingScreen');
+      setTimeout(() => {
+        renderResult(result);
+        showScreen('resultScreen');
+      }, 1400);
+    }
+
+    function calculateResult(){
+      let score = 0;
+      questions.forEach(q => {
+        const selected = q.options.find(o => o.value === lead[q.key]);
+        if(selected) score += selected.points || 0;
+      });
+      score = Math.min(100, Math.round(score / 3.2));
+
+      let temperatura = 'Morno';
+      if(score >= 75) temperatura = 'Quente';
+      if(score < 48) temperatura = 'Frio';
+
+      let produto = 'Energia por assinatura';
+      if(lead.acesso_fatura === 'sem_acesso') produto = 'Pré-análise e nutrição';
+      if(score < 45) produto = 'Eficiência energética / reavaliação futura';
+
+      let dor = lead.DorPrincipal || 'Possível oportunidade de redução de custos';
+      let objecao = lead.ObjecaoPrincipal || 'Precisa de clareza antes de avançar';
+
+      let diagnostico = 'Identificamos indícios de oportunidade para reduzir custos, mas a confirmação depende da análise da sua fatura.';
+      if(temperatura === 'Quente') diagnostico = 'Suas respostas indicam bom potencial para uma análise de economia com energia por assinatura.';
+      if(temperatura === 'Frio') diagnostico = 'Suas respostas indicam que talvez o potencial imediato seja menor, mas ainda pode existir oportunidade na análise da fatura.';
+
+      return {
+        Score: score,
+        Temperatura: temperatura,
+        DorPrincipal: dor,
+        ObjecaoPrincipal: objecao,
+        ProdutoRecomendado: produto,
+        Diagnostico: diagnostico
+      };
+    }
+
+    function objectionMessage(objection){
+      const messages = {
+        'Medo de promessa não cumprida': 'Entendemos sua preocupação. Por isso, o próximo passo não é assumir uma promessa pronta, mas analisar sua fatura e verificar se existe uma oportunidade real no seu caso.',
+        'Medo de cobrança escondida': 'Essa dúvida é muito comum. A análise serve justamente para explicar o cenário com transparência antes de qualquer proposta, evitando surpresa ou interpretação errada.',
+        'Desconfiança no mercado': 'É natural ter cautela. O mercado de energia cresceu rápido e muitas propostas são difíceis de entender. Aqui, o primeiro passo é consultivo: entender sua conta antes de falar em contratação.',
+        'Experiência ruim anterior': 'Sentimos muito que você já tenha passado por isso. Justamente por esse motivo, a análise começa pela fatura e pelo seu histórico, para evitar uma proposta genérica que não faça sentido.',
+        'Já possui solução ativa': 'Mesmo quem já possui alguma solução pode ter consumo descoberto, geração insuficiente, alteração de perfil ou pontos que merecem revisão. Por isso a análise ainda pode fazer sentido.',
+        'Falta de confiança ou clareza': 'Antes de qualquer decisão, é importante entender com calma de onde viria a economia e quais pontos da fatura precisam ser observados.',
+        'Precisa de clareza antes de avançar': 'Você não precisa decidir nada agora. O objetivo desta etapa é apenas verificar se sua conta possui sinais de oportunidade e se vale a pena uma análise mais detalhada.'
+      };
+      return messages[objection] || messages['Precisa de clareza antes de avançar'];
+    }
+
+    function renderResult(result){
+      const firstName = lead.Nome.split(' ')[0];
+      const tempLabel = result.Temperatura === 'Quente' ? 'Bom potencial identificado' : result.Temperatura === 'Morno' ? 'Potencial a confirmar' : 'Análise recomendada com cautela';
+
+      document.getElementById('resultContent').innerHTML = `
+        <div class="result-head">
+          <h2>${firstName}, seu diagnóstico inicial está pronto.</h2>
+          <div class="score"><strong>${result.Score}</strong><span>/100</span></div>
+          <p>${tempLabel}</p>
+        </div>
+
+        <h3>O que identificamos pelas suas respostas</h3>
+        <p>${result.Diagnostico}</p>
+
+        <div class="diagnosis-grid">
+          <div class="diagnosis-box">
+            <strong>Dor principal percebida</strong>
+            <p>${result.DorPrincipal}</p>
+          </div>
+          <div class="diagnosis-box">
+            <strong>Melhor próximo passo</strong>
+            <p>Enviar uma fatura recente para confirmar se existe potencial real de economia.</p>
+          </div>
+          <div class="diagnosis-box">
+            <strong>Oportunidade possível</strong>
+            <p>${result.ProdutoRecomendado}</p>
+          </div>
+          <div class="diagnosis-box">
+            <strong>O que ainda falta confirmar</strong>
+            <p>Consumo, tarifa, créditos, bandeiras, histórico e elegibilidade da unidade.</p>
+          </div>
+        </div>
+
+        <div class="objection">
+          <h3>Antes de qualquer proposta, um ponto importante:</h3>
+          <p>${objectionMessage(result.ObjecaoPrincipal)}</p>
+        </div>
+
+        <div class="notice">
+          <strong>Importante:</strong> este diagnóstico é uma pré-análise. Não prometemos economia fixa pelo quiz, porque o valor real só pode ser avaliado com a sua conta de energia.
+        </div>
+
+        <div class="unlock">
+          <h3>Quer confirmar se existe economia real no seu caso?</h3>
+          <p>Informe seu WhatsApp para liberar o próximo passo e iniciar a conversa com a mensagem pronta para envio da sua fatura.</p>
+          <div class="input-group">
+            <label for="phoneInput">Seu WhatsApp</label>
+            <input id="phoneInput" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" oninput="maskPhone(this)" />
+            <div id="phoneError" class="error">Digite um WhatsApp válido para continuar.</div>
+          </div>
+          <button class="btn-full" onclick="submitPhoneAndOpenWhatsApp()">Enviar minha fatura para análise</button>
+          <p class="fineprint">Ao continuar, você concorda em ser contatado para receber orientação sobre a análise da sua conta de energia.</p>
+        </div>
+      `;
+    }
+
+    function maskPhone(input){
+      let v = input.value.replace(/\D/g,'').slice(0,11);
+      if(v.length > 10){
+        input.value = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      }else if(v.length > 6){
+        input.value = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      }else if(v.length > 2){
+        input.value = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+      }else{
+        input.value = v;
+      }
+    }
+
+    function onlyDigits(v){return (v || '').replace(/\D/g,'')}
+
+    function submitPhoneAndOpenWhatsApp(){
+      const phone = onlyDigits(document.getElementById('phoneInput').value);
+      if(phone.length < 10){
+        document.getElementById('phoneError').style.display = 'block';
+        return;
+      }
+      document.getElementById('phoneError').style.display = 'none';
+      lead.WhatsApp = phone;
+      sendLeadUpdate('lead_com_whatsapp');
+      trackLeadMeta();
+
+      const msg = `Olá, acabei de concluir o Diagnóstico de Economia de Energia. Meu nome é ${lead.Nome} e gostaria de enviar minha conta de energia para análise. Meu resultado foi: ${lead.Temperatura}, score ${lead.Score}/100. Minha principal dúvida/dor: ${lead.DorPrincipal}.`;
+      const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.location.href = url;
+    }
+
+    function trackLeadMeta(){
+      try{
+        const firstName = lead.Nome.split(' ')[0] || '';
+        fbq('init', CONFIG.PIXEL_ID, {
+          fn: firstName.toLowerCase(),
+          ph: lead.WhatsApp
+        });
+        fbq('track', 'Lead', {
+          content_name: 'Diagnostico Energia',
+          status: lead.Temperatura,
+          score: lead.Score,
+          dor_principal: lead.DorPrincipal,
+          produto_recomendado: lead.ProdutoRecomendado
+        });
+      }catch(e){console.warn('Pixel error', e)}
+    }
+
+    function sendLeadUpdate(eventName){
+      const payload = {
+        Evento: eventName,
+        ...lead,
+        TimestampEnvio: new Date().toISOString()
+      };
+
+      try{
+        fetch(CONFIG.SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      }catch(e){console.warn('Lead update error', e)}
+    }
+  </script>
+</body>
+</html>
