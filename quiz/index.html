@@ -771,6 +771,27 @@
       return messages[objection] || messages['Precisa de clareza antes de avançar'];
     }
 
+
+
+    function preAnalysisMessage(dor){
+      const messages = {
+        'Conta alta': 'Você informou que considera sua conta de energia acima do ideal. Isso não significa necessariamente que existe erro na cobrança, mas pode indicar oportunidades de redução que só podem ser confirmadas através da análise da fatura.',
+        'Dúvida sobre custo': 'Você demonstrou dúvida sobre se o valor atual da sua conta está adequado. Essa incerteza é comum, porque a economia real depende da tarifa aplicada, do consumo e das condições da unidade consumidora.',
+        'Falta de clareza': 'Você informou que não tem total clareza sobre sua conta de energia. Muitos consumidores só descobrem oportunidades de economia depois de analisar detalhes da fatura que normalmente passam despercebidos.',
+        'Não entende a fatura': 'Você informou que não entende totalmente como sua conta de energia é calculada. A análise da fatura ajuda a identificar tarifa, consumo, créditos e possíveis oportunidades de redução.',
+        'Baixa clareza da fatura': 'Você entende apenas parte da sua conta. A pré-análise indica que vale olhar a fatura com mais cuidado para entender se existe alguma oportunidade de economia.',
+        'Dependência de terceiro': 'Como outra pessoa costuma cuidar da conta, pode ser importante revisar a fatura para ter mais clareza sobre tarifa, consumo e possíveis oportunidades de redução.',
+        'Conta varia sem explicação': 'Você relatou variações na conta sem uma explicação clara. Esse comportamento pode estar ligado ao perfil de consumo, bandeiras, tarifas ou outros pontos que precisam ser avaliados na fatura.',
+        'Falta de previsibilidade': 'Você relatou dificuldade para prever quanto pagará de energia nos próximos meses. A análise da fatura ajuda a entender o padrão de consumo e o que pode estar influenciando essa variação.',
+        'Dúvida sobre cobrança': 'Você demonstrou incerteza sobre a forma como sua energia está sendo cobrada. A análise da fatura permite verificar se existem oportunidades de otimização e esclarecer como os valores são calculados.',
+        'Peso no orçamento': 'Você informou que a energia pesa no orçamento. Nesses casos, uma análise da fatura pode mostrar se existe potencial de economia através de compensação de energia ou ajustes no consumo.',
+        'Solução atual insuficiente': 'Você informou que, mesmo com alguma solução atual, a conta ainda parece alta. Isso pode acontecer quando a geração não cobre todo o consumo, quando o perfil mudou ou quando ainda existe consumo descoberto.',
+        'Possível instabilidade': 'Você indicou que a conta às vezes ainda parece alta. A fatura ajuda a entender se isso vem de variação de consumo, tarifa, créditos ou algum ponto específico da unidade.',
+        'Possível oportunidade de redução de custos': 'Pelas suas respostas, existe sinal de que sua conta merece uma avaliação mais detalhada. A confirmação depende da análise da fatura e das condições da unidade consumidora.'
+      };
+      return messages[dor] || messages['Possível oportunidade de redução de custos'];
+    }
+
     function renderResult(result){
       const firstName = lead.Nome.split(' ')[0];
       const estimate = getSavingsEstimate();
@@ -807,8 +828,8 @@
         ${savingsBlock}
 
         <div class="simple-list">
-          <div class="simple-item"><strong>Ponto que mais merece atenção:</strong><br>${result.DorPrincipal}</div>
-          <div class="simple-item"><strong>Para confirmar o valor real:</strong><br>envie uma conta recente para avaliarmos tarifa, consumo e elegibilidade.</div>
+          <div class="simple-item"><strong>O que encontramos na sua pré-análise:</strong><br>${preAnalysisMessage(result.DorPrincipal)}</div>
+          <div class="simple-item"><strong>Próximo passo:</strong><br>Com base apenas nas respostas, não é possível confirmar o valor exato da economia. Para isso precisamos analisar uma conta recente e verificar tarifa, consumo, elegibilidade e potencial real de economia.</div>
         </div>
 
         <div class="soft-note">
@@ -857,7 +878,7 @@
       sendLeadUpdate('lead_com_whatsapp');
       trackLeadMeta();
 
-      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise. Minha principal dúvida é: ${lead.DorPrincipal}. Minha estimativa no quiz ficou entre ${money(lead.EconomiaMensalMin || 0)} e ${money(lead.EconomiaMensalMax || 0)} por mês, mas quero confirmar pela fatura.`;
+      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise. O ponto observado na pré-análise foi: ${lead.DorPrincipal}. Minha estimativa no quiz ficou entre ${money(lead.EconomiaMensalMin || 0)} e ${money(lead.EconomiaMensalMax || 0)} por mês, mas quero confirmar pela fatura.`;
       const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       setTimeout(() => { window.location.href = url; }, 350);
     }
