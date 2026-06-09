@@ -268,6 +268,29 @@
     .objection h3{font-size:20px; margin-bottom:8px}
     .objection p{color:#5f4100; margin-bottom:0}
 
+    .savings-card{
+      border:1px solid rgba(15,159,110,.24);
+      background:linear-gradient(180deg,#f7fffb,#ffffff);
+      border-radius:20px;
+      padding:22px;
+      margin:18px 0;
+    }
+    .savings-card h3{margin-bottom:10px}
+    .savings-values{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .savings-value{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .savings-value small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}
+    .savings-value strong{font-size:19px;color:#073b2b}
+
     .unlock{
       border:1px solid rgba(15,159,110,.25);
       background:var(--soft);
@@ -280,6 +303,41 @@
     .hidden{display:none!important}
     .error{color:#b42318; font-size:14px; margin-top:8px; display:none}
     .fineprint{font-size:13px; color:#7b8794; margin-top:14px}
+
+    .lead-result-card{
+      border:1px solid rgba(15,159,110,.18);
+      background:#f7fffb;
+      border-radius:18px;
+      padding:20px;
+      margin:18px 0;
+    }
+    .lead-result-card h3{margin-bottom:8px}
+    .lead-result-card p{margin-bottom:0;color:#315647}
+    .simple-list{
+      display:grid;
+      gap:10px;
+      margin:18px 0;
+    }
+    .simple-item{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px 15px;
+      font-size:15px;
+      color:#344054;
+      line-height:1.45;
+    }
+    .soft-note{
+      background:#fffaf0;
+      border:1px solid #f6d79b;
+      color:#5c4300;
+      border-radius:16px;
+      padding:16px;
+      margin:18px 0;
+      line-height:1.5;
+    }
+    .soft-note p{color:#5c4300;margin:0;font-size:15px}
+
 
     .loading{
       text-align:center;
@@ -302,7 +360,7 @@
       .content{padding:24px 20px}
       h1{font-size:30px}
       h2,.question-title{font-size:24px}
-      .hero-list,.diagnosis-grid{grid-template-columns:1fr}
+      .hero-list,.diagnosis-grid,.savings-values{grid-template-columns:1fr}
       .actions{flex-direction:column-reverse; align-items:stretch}
       button,.btn{width:100%}
     }
@@ -319,25 +377,16 @@
       <div class="content">
         <div id="startScreen" class="screen active">
           <h1>Sua conta de energia pode estar mais alta do que deveria.</h1>
-          <p>Responda algumas perguntas rápidas e receba um diagnóstico inicial sobre possíveis oportunidades de redução de custos.</p>
-
-          <div class="hero-list">
-            <div class="mini-card">Sem compromisso</div>
-            <div class="mini-card">Sem promessa genérica</div>
-            <div class="mini-card">Foco na análise da sua conta</div>
-          </div>
-
-          <div class="notice">
-            Este diagnóstico não substitui a análise da fatura. Ele serve para identificar indícios de economia e orientar o próximo passo com mais segurança.
-          </div>
+          <p>Faça uma pré-análise rápida e veja o próximo passo para confirmar economia.</p>
 
           <div class="input-group">
-            <label for="nameInput">Para começar, qual é o seu nome?</label>
+            <label for="nameInput">Qual é o seu nome?</label>
             <input id="nameInput" type="text" placeholder="Digite seu nome" autocomplete="name" />
             <div id="nameError" class="error">Digite seu nome para continuar.</div>
           </div>
 
-          <button onclick="startQuiz()">Começar meu diagnóstico</button>
+          <button onclick="startQuiz()">Começar diagnóstico</button>
+          <p class="fineprint">Sem compromisso. A economia real só é confirmada após a análise da fatura.</p>
         </div>
 
         <div id="quizScreen" class="screen">
@@ -353,9 +402,6 @@
           <p id="questionSub" class="question-sub"></p>
           <div id="options" class="options"></div>
 
-          <div class="actions">
-            <button id="backBtn" class="btn-secondary" onclick="prevQuestion()">Voltar</button>
-          </div>
         </div>
 
         <div id="loadingScreen" class="screen">
@@ -398,7 +444,20 @@
       DorPrincipal: '',
       ObjecaoPrincipal: '',
       ProdutoRecomendado: '',
-      Diagnostico: ''
+      Diagnostico: '',
+      EtapaAtual: 'inicio',
+      PerguntaAtual: '',
+      ProgressoQuiz: '0%',
+      UltimaPergunta: '',
+      UltimaResposta: '',
+      StatusFunil: 'iniciou',
+      ValorBaseEstimativa: '',
+      EconomiaMensalMin: '',
+      EconomiaMensalMax: '',
+      EconomiaAnualMin: '',
+      EconomiaAnualMax: '',
+      Economia36MesesMin: '',
+      Economia36MesesMax: ''
     };
 
     const questions = [
@@ -551,6 +610,8 @@
       }
       document.getElementById('nameError').style.display = 'none';
       lead.Nome = name;
+      lead.EtapaAtual = 'nome_capturado';
+      lead.StatusFunil = 'nome informado';
       sendLeadUpdate('nome_capturado');
       showScreen('quizScreen');
       renderQuestion();
@@ -558,6 +619,9 @@
 
     function renderQuestion(){
       const q = questions[currentQuestion];
+      lead.EtapaAtual = `pergunta_${currentQuestion + 1}`;
+      lead.PerguntaAtual = q.key;
+      lead.ProgressoQuiz = `${Math.round(((currentQuestion + 1) / questions.length) * 100)}%`;
       document.getElementById('questionTitle').textContent = `${lead.Nome.split(' ')[0]}, ${q.title.charAt(0).toLowerCase()}${q.title.slice(1)}`;
       document.getElementById('questionSub').textContent = q.sub || '';
       const total = questions.length;
@@ -565,7 +629,7 @@
       document.getElementById('progressText').textContent = `Pergunta ${currentQuestion + 1} de ${total}`;
       document.getElementById('progressPercent').textContent = `${percent}%`;
       document.getElementById('progressBar').style.width = `${percent}%`;
-      document.getElementById('backBtn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+      sendLeadUpdate(`visualizou_${q.key}`);
 
       const options = document.getElementById('options');
       options.innerHTML = '';
@@ -581,6 +645,12 @@
     function selectOption(q, opt){
       lead[q.key] = opt.value;
       lead[`${q.key}_label`] = opt.label;
+      lead.EtapaAtual = `pergunta_${currentQuestion + 1}_respondida`;
+      lead.PerguntaAtual = q.key;
+      lead.ProgressoQuiz = `${Math.round(((currentQuestion + 1) / questions.length) * 100)}%`;
+      lead.UltimaPergunta = q.title;
+      lead.UltimaResposta = opt.label;
+      lead.StatusFunil = currentQuestion === questions.length - 1 ? 'quiz completo' : `respondeu pergunta ${currentQuestion + 1}`;
       if(opt.pain) lead.DorPrincipal = opt.pain;
       if(opt.objection) lead.ObjecaoPrincipal = opt.objection;
       sendLeadUpdate(`resposta_${q.key}`);
@@ -595,16 +665,13 @@
       }, 120);
     }
 
-    function prevQuestion(){
-      if(currentQuestion > 0){
-        currentQuestion--;
-        renderQuestion();
-      }
-    }
 
     function finishQuiz(){
       const result = calculateResult();
       Object.assign(lead, result);
+      lead.EtapaAtual = 'diagnostico_gerado';
+      lead.StatusFunil = 'viu resultado parcial';
+      lead.ProgressoQuiz = '100%';
       sendLeadUpdate('diagnostico_gerado');
       showScreen('loadingScreen');
       setTimeout(() => {
@@ -636,6 +703,8 @@
       if(temperatura === 'Quente') diagnostico = 'Suas respostas indicam bom potencial para uma análise de economia com energia por assinatura.';
       if(temperatura === 'Frio') diagnostico = 'Suas respostas indicam que talvez o potencial imediato seja menor, mas ainda pode existir oportunidade na análise da fatura.';
 
+      getSavingsEstimate();
+
       return {
         Score: score,
         Temperatura: temperatura,
@@ -644,6 +713,37 @@
         ProdutoRecomendado: produto,
         Diagnostico: diagnostico
       };
+    }
+
+    function money(value){
+      return value.toLocaleString('pt-BR', {style:'currency', currency:'BRL', maximumFractionDigits:0});
+    }
+
+    function getSavingsEstimate(){
+      const baseMap = {
+        'ate_500': 500,
+        '500_1000': 750,
+        '1000_3000': 2000,
+        '3000_10000': 6500,
+        'acima_10000': 10000
+      };
+      const base = baseMap[lead.valor_conta] || 0;
+      const monthlyMin = Math.round(base * 0.15);
+      const monthlyMax = Math.round(base * 0.30);
+      const annualMin = monthlyMin * 12;
+      const annualMax = monthlyMax * 12;
+      const threeYearMin = monthlyMin * 36;
+      const threeYearMax = monthlyMax * 36;
+
+      lead.ValorBaseEstimativa = base;
+      lead.EconomiaMensalMin = monthlyMin;
+      lead.EconomiaMensalMax = monthlyMax;
+      lead.EconomiaAnualMin = annualMin;
+      lead.EconomiaAnualMax = annualMax;
+      lead.Economia36MesesMin = threeYearMin;
+      lead.Economia36MesesMax = threeYearMax;
+
+      return {base, monthlyMin, monthlyMax, annualMin, annualMax, threeYearMin, threeYearMax};
     }
 
     function objectionMessage(objection){
@@ -661,56 +761,58 @@
 
     function renderResult(result){
       const firstName = lead.Nome.split(' ')[0];
-      const tempLabel = result.Temperatura === 'Quente' ? 'Bom potencial identificado' : result.Temperatura === 'Morno' ? 'Potencial a confirmar' : 'Análise recomendada com cautela';
+      const estimate = getSavingsEstimate();
+      const tempLabel = result.Temperatura === 'Quente' ? 'bom potencial para análise' : result.Temperatura === 'Morno' ? 'vale confirmar pela fatura' : 'análise recomendada com cautela';
+      const mainLine = result.Temperatura === 'Quente'
+        ? 'Pelas suas respostas, existe um bom sinal de que sua conta merece uma análise mais detalhada.'
+        : result.Temperatura === 'Morno'
+          ? 'Pelas suas respostas, pode existir oportunidade de economia, mas precisamos confirmar pela fatura.'
+          : 'Pelas suas respostas, ainda não dá para afirmar um alto potencial, mas a fatura pode revelar pontos importantes.';
+
+      const savingsBlock = estimate.base > 0 ? `
+        <div class="savings-card">
+          <h3>Estimativa inicial de economia</h3>
+          <p>Com base no valor informado da sua conta, esta é uma simulação aproximada considerando desconto entre 15% e 30% sobre a tarifa da Energisa.</p>
+          <div class="savings-values">
+            <div class="savings-value"><small>Por mês</small><strong>${money(estimate.monthlyMin)} a ${money(estimate.monthlyMax)}</strong></div>
+            <div class="savings-value"><small>Em 1 ano</small><strong>${money(estimate.annualMin)} a ${money(estimate.annualMax)}</strong></div>
+            <div class="savings-value"><small>Em 36 meses</small><strong>${money(estimate.threeYearMin)} a ${money(estimate.threeYearMax)}</strong></div>
+          </div>
+          <p class="fineprint">A economia real depende da análise da fatura, consumo, classe tarifária, créditos, bandeiras e condições da unidade consumidora.</p>
+        </div>` : '';
 
       document.getElementById('resultContent').innerHTML = `
         <div class="result-head">
-          <h2>${firstName}, seu diagnóstico inicial está pronto.</h2>
-          <div class="score"><strong>${result.Score}</strong><span>/100</span></div>
+          <h2>${firstName}, sua pré-análise está pronta.</h2>
           <p>${tempLabel}</p>
         </div>
 
-        <h3>O que identificamos pelas suas respostas</h3>
-        <p>${result.Diagnostico}</p>
-
-        <div class="diagnosis-grid">
-          <div class="diagnosis-box">
-            <strong>Dor principal percebida</strong>
-            <p>${result.DorPrincipal}</p>
-          </div>
-          <div class="diagnosis-box">
-            <strong>Melhor próximo passo</strong>
-            <p>Enviar uma fatura recente para confirmar se existe potencial real de economia.</p>
-          </div>
-          <div class="diagnosis-box">
-            <strong>Oportunidade possível</strong>
-            <p>${result.ProdutoRecomendado}</p>
-          </div>
-          <div class="diagnosis-box">
-            <strong>O que ainda falta confirmar</strong>
-            <p>Consumo, tarifa, créditos, bandeiras, histórico e elegibilidade da unidade.</p>
-          </div>
+        <div class="lead-result-card">
+          <h3>O que percebemos</h3>
+          <p>${mainLine}</p>
         </div>
 
-        <div class="objection">
-          <h3>Antes de qualquer proposta, um ponto importante:</h3>
+        ${savingsBlock}
+
+        <div class="simple-list">
+          <div class="simple-item"><strong>Ponto que mais merece atenção:</strong><br>${result.DorPrincipal}</div>
+          <div class="simple-item"><strong>Para confirmar o valor real:</strong><br>envie uma conta recente para avaliarmos tarifa, consumo e elegibilidade.</div>
+        </div>
+
+        <div class="soft-note">
           <p>${objectionMessage(result.ObjecaoPrincipal)}</p>
         </div>
 
-        <div class="notice">
-          <strong>Importante:</strong> este diagnóstico é uma pré-análise. Não prometemos economia fixa pelo quiz, porque o valor real só pode ser avaliado com a sua conta de energia.
-        </div>
-
         <div class="unlock">
-          <h3>Quer confirmar se existe economia real no seu caso?</h3>
-          <p>Informe seu WhatsApp para liberar o próximo passo e iniciar a conversa com a mensagem pronta para envio da sua fatura.</p>
+          <h3>Quer confirmar pela sua fatura?</h3>
+          <p>Informe seu WhatsApp e já abra a conversa com uma mensagem pronta para enviar sua conta de energia.</p>
           <div class="input-group">
             <label for="phoneInput">Seu WhatsApp</label>
             <input id="phoneInput" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" oninput="maskPhone(this)" />
             <div id="phoneError" class="error">Digite um WhatsApp válido para continuar.</div>
           </div>
-          <button class="btn-full" onclick="submitPhoneAndOpenWhatsApp()">Enviar minha fatura para análise</button>
-          <p class="fineprint">Ao continuar, você concorda em ser contatado para receber orientação sobre a análise da sua conta de energia.</p>
+          <button class="btn-full" onclick="submitPhoneAndOpenWhatsApp()">Quero enviar minha fatura</button>
+          <p class="fineprint">Sem compromisso. A análise da fatura é o que confirma se existe oportunidade real.</p>
         </div>
       `;
     }
@@ -738,12 +840,14 @@
       }
       document.getElementById('phoneError').style.display = 'none';
       lead.WhatsApp = phone;
+      lead.EtapaAtual = 'whatsapp_informado';
+      lead.StatusFunil = 'clicou para enviar fatura';
       sendLeadUpdate('lead_com_whatsapp');
       trackLeadMeta();
 
-      const msg = `Olá, acabei de concluir o Diagnóstico de Economia de Energia. Meu nome é ${lead.Nome} e gostaria de enviar minha conta de energia para análise. Meu resultado foi: ${lead.Temperatura}, score ${lead.Score}/100. Minha principal dúvida/dor: ${lead.DorPrincipal}.`;
+      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise. Minha principal dúvida é: ${lead.DorPrincipal}. Minha estimativa no quiz ficou entre ${money(lead.EconomiaMensalMin || 0)} e ${money(lead.EconomiaMensalMax || 0)} por mês, mas quero confirmar pela fatura.`;
       const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.location.href = url;
+      setTimeout(() => { window.location.href = url; }, 350);
     }
 
     function trackLeadMeta(){
@@ -774,7 +878,8 @@
         fetch(CONFIG.SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: {'Content-Type':'application/json'},
+          keepalive: true,
+          headers: {'Content-Type':'text/plain;charset=utf-8'},
           body: JSON.stringify(payload)
         }).catch(() => {});
       }catch(e){console.warn('Lead update error', e)}
