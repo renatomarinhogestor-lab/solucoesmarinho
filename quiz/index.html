@@ -428,8 +428,7 @@
       WHATSAPP_NUMBER: '5567999999999'
     };
 
-    const sessionId = localStorage.getItem('energia_quiz_session') || `lead_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
-    localStorage.setItem('energia_quiz_session', sessionId);
+      const sessionId = `lead_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
 
     let currentQuestion = 0;
     const lead = {
