@@ -910,7 +910,7 @@
       sendLeadUpdate('lead_com_whatsapp');
       trackLeadMeta();
 
-      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise. O ponto observado na pré-análise foi: ${lead.DorPrincipal}. Minha estimativa no quiz ficou entre ${money(lead.EconomiaMensalMin || 0)} e ${money(lead.EconomiaMensalMax || 0)} por mês, mas quero confirmar pela fatura.`;
+      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise.`;
       const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       setTimeout(() => { window.location.href = url; }, 350);
     }
