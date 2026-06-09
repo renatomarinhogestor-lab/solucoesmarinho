@@ -424,7 +424,7 @@
       SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxb1PelY2bvj480VE2h3bvF75f1NY9jE0N8V_yFQjyTzJBMfg_FmjVX7vrkqljpPQdsaw/exec',
       PIXEL_ID: '1136684233668972',
       // Troque pelo WhatsApp correto do comercial, somente números com DDI/DDD.
-      WHATSAPP_NUMBER: '5567999999999'
+      WHATSAPP_NUMBER: '5567999076005'
     };
 
     const sessionId = localStorage.getItem('energia_quiz_session') || `lead_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
@@ -845,7 +845,7 @@
       sendLeadUpdate('lead_com_whatsapp');
       trackLeadMeta();
 
-      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise. Minha principal dúvida é: ${lead.DorPrincipal}. Minha estimativa no quiz ficou entre ${money(lead.EconomiaMensalMin || 0)} e ${money(lead.EconomiaMensalMax || 0)} por mês, mas quero confirmar pela fatura.`;
+      const msg = `Olá, acabei de concluir o diagnóstico de energia. Meu nome é ${lead.Nome} e quero enviar minha fatura para análise.`;
       const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       setTimeout(() => { window.location.href = url; }, 350);
     }
