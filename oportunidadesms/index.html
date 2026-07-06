@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Cadastro recebido | Oportunidades MS</title>
+
+  <meta name="description" content="Recebemos seu interesse na oportunidade. A Oportunidades MS entrará em contato com interessados alinhados ao perfil da operação." />
+
+  <style>
+    :root {
+      --bg-dark: #031126;
+      --bg-card: rgba(6, 22, 46, 0.82);
+      --blue: #079cff;
+      --blue-soft: #45baff;
+      --white: #ffffff;
+      --muted: #b8c6d8;
+      --line: rgba(69, 186, 255, 0.28);
+      --success: #29d17d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(7, 156, 255, 0.22), transparent 34%),
+        radial-gradient(circle at 80% 10%, rgba(7, 156, 255, 0.15), transparent 28%),
+        linear-gradient(135deg, #020814 0%, #031126 48%, #061a35 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      position: relative;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(7, 156, 255, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .page::before {
+      width: 280px;
+      height: 280px;
+      left: -110px;
+      bottom: -120px;
+    }
+
+    .page::after {
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -80px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 42px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(18px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(7, 156, 255, 0.12), transparent 42%),
+        linear-gradient(300deg, rgba(255, 255, 255, 0.06), transparent 35%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), #004fd8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 0 28px rgba(7, 156, 255, 0.36);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(41, 209, 125, 0.12);
+      color: #9cf3c2;
+      border: 1px solid rgba(41, 209, 125, 0.28);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .badge span {
+      width: 9px;
+      height: 9px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(41, 209, 125, 0.8);
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -1.4px;
+      margin-bottom: 18px;
+    }
+
+    h1 strong {
+      color: var(--blue-soft);
+      display: block;
+    }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 26px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 15px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .step-number {
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: rgba(7, 156, 255, 0.18);
+      color: var(--blue-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      border: 1px solid rgba(7, 156, 255, 0.35);
+    }
+
+    .step p {
+      color: #d8e4f2;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .cta-box {
+      background: linear-gradient(180deg, rgba(7, 156, 255, 0.16), rgba(7, 156, 255, 0.055));
+      border: 1px solid rgba(7, 156, 255, 0.32);
+      border-radius: 24px;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .cta-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 22px;
+      background: rgba(7, 156, 255, 0.14);
+      border: 1px solid rgba(7, 156, 255, 0.36);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 0 40px rgba(7, 156, 255, 0.18);
+    }
+
+    .cta-box h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 56px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #19c767, #0a9f4e);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 14px 34px rgba(25, 199, 103, 0.24);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(25, 199, 103, 0.32);
+    }
+
+    .small-note {
+      margin-top: 16px;
+      color: #8ea4bd;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #8ea4bd;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .highlight {
+      color: var(--blue-soft);
+      font-weight: 700;
+    }
+
+    @media (max-width: 820px) {
+      body {
+        padding: 18px;
+        align-items: flex-start;
+      }
+
+      .card {
+        padding: 28px 22px;
+        border-radius: 22px;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .brand {
+        margin-bottom: 24px;
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .cta-box {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="content">
+
+        <div>
+          <div class="brand">
+            <div class="brand-mark">MS</div>
+            <div>Oportunidades MS</div>
+          </div>
+
+          <div class="badge">
+            <span></span>
+            Cadastro recebido
+          </div>
+
+          <h1>
+            Recebemos seu interesse
+            <strong>na oportunidade.</strong>
+          </h1>
+
+          <p class="lead">
+            Obrigado por preencher o formulário. Suas informações serão analisadas para entendermos se o seu perfil está alinhado com esta oportunidade de negócio em operação.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <p>
+                Vamos revisar as informações enviadas no formulário para identificar interessados com perfil real de compra.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <p>
+                Os interessados mais alinhados receberão informações iniciais sobre a operação, estrutura e próximos passos.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <p>
+                Detalhes sensíveis da negociação serão tratados no momento adequado, com pessoas realmente interessadas na operação completa.
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            Esta oportunidade envolve uma <span class="highlight">academia em funcionamento em Nova Alvorada do Sul - MS</span>. 
+            A venda é da operação como negócio, não de equipamentos avulsos.
+          </div>
+        </div>
+
+        <aside class="cta-box">
+          <div class="cta-icon">✓</div>
+
+          <h2>Quer agilizar o atendimento?</h2>
+
+          <p>
+            Clique no botão abaixo e envie uma mensagem pelo WhatsApp informando que você preencheu o formulário e deseja avançar na análise da oportunidade.
+          </p>
+
+          <a
+            class="button"
+            href="https://wa.me/5567999076005?text=Ol%C3%A1%2C%20preenchi%20o%20formul%C3%A1rio%20e%20tenho%20interesse%20em%20entender%20melhor%20a%20oportunidade%20da%20academia%20em%20opera%C3%A7%C3%A3o%20em%20Nova%20Alvorada%20do%20Sul%20-%20MS."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Agilizar atendimento no WhatsApp
+          </a>
+
+          <p class="small-note">
+            O contato pelo WhatsApp não garante envio imediato de valores ou informações sensíveis. O atendimento seguirá uma pré-qualificação para preservar a seriedade da oportunidade.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
