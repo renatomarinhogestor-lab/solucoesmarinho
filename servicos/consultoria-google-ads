@@ -307,15 +307,19 @@
     }
 
     .deliverable-index {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      font-weight: 900;
-      color: #07111f;
-      background: linear-gradient(135deg, #ffffff, var(--secondary));
-    }
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 14px;
+
+  color: #07111f !important;
+  background: #8ff0d7;
+
+  border: 1px solid rgba(7, 17, 31, 0.12);
+}
 
     .deliverable strong {
       display: block;
