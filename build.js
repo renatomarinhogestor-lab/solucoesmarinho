@@ -71,12 +71,28 @@ function copyAndProcess(source, destination) {
 
   fs.mkdirSync(path.dirname(destination), { recursive: true });
 
-  if (path.extname(source).toLowerCase() !== ".html") {
-    fs.copyFileSync(source, destination);
-    return;
-  }
+const extension = path.extname(source).toLowerCase();
 
-  let html = fs.readFileSync(source, "utf8");
+let content;
+
+try {
+  content = fs.readFileSync(source, "utf8");
+} catch {
+  fs.copyFileSync(source, destination);
+  return;
+}
+
+const looksLikeHtml =
+  extension === ".html" ||
+  /<!doctype html>/i.test(content) ||
+  /<html[\s>]/i.test(content);
+
+if (!looksLikeHtml) {
+  fs.copyFileSync(source, destination);
+  return;
+}
+
+let html = content;
 
   // Evita duplicar o GTM caso a página já tenha recebido a tag.
   if (!html.includes(GTM_ID)) {
