@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consultoria Google Ads | Análise e Otimização Estratégica | Renato Marinho</title>
+  <meta name="description" content="Consultoria Google Ads para identificar desperdícios, oportunidades e prioridades na sua conta. Análise estratégica e gestão direta com Renato Marinho.">
+  <meta name="theme-color" content="#07111f">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Consultoria Google Ads | Renato Marinho">
+  <meta property="og:description" content="Análise estratégica de Google Ads para entender o que manter, corrigir, cortar e escalar na sua conta.">
+  <meta property="og:image" content="https://solucoesmarinho.com.br/og-image.jpg">
+  <meta property="og:url" content="https://solucoesmarinho.com.br/servicos/consultoria-google-ads">
+  <link rel="canonical" href="https://solucoesmarinho.com.br/servicos/consultoria-google-ads">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0b1728;
+      --panel: rgba(255,255,255,.055);
+      --panel-strong: rgba(255,255,255,.085);
+      --text: #f5f8ff;
+      --muted: #e2e9f3;
+      --line: rgba(255,255,255,.12);
+      --primary: #6d8cff;
+      --primary-strong: #4c6fff;
+      --secondary: #68e0c1;
+      --warning: #ffd37a;
+      --shadow: 0 24px 70px rgba(0,0,0,.35);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% -5%, rgba(109,140,255,.22), transparent 34%),
+        radial-gradient(circle at 90% 10%, rgba(104,224,193,.13), transparent 28%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    img { max-width: 100%; display: block; }
+    section { scroll-margin-top: 88px; }
+
+    .container { width: min(calc(100% - 36px), var(--max)); margin-inline: auto; }
+    .skip-link {
+      position: fixed; left: 16px; top: -80px; z-index: 999;
+      background: #fff; color: #111; padding: 12px 16px; border-radius: 10px;
+    }
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,17,31,.76);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav {
+      min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 12px; color: #07111f; font-weight: 900;
+      background: linear-gradient(135deg, var(--secondary), #eefcff);
+      box-shadow: 0 10px 30px rgba(104,224,193,.18);
+    }
+    .brand small { display: block; color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { padding: 10px 16px; border: 1px solid rgba(109,140,255,.5); border-radius: 999px; color: #fff !important; background: rgba(109,140,255,.12); }
+
+    .hero { padding: 88px 0 64px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 54px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; padding: 8px 12px;
+      border: 1px solid rgba(104,224,193,.28); border-radius: 999px;
+      color: #c9fff1; background: rgba(104,224,193,.075);
+      font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--secondary); box-shadow: 0 0 0 5px rgba(104,224,193,.1); }
+    h1, h2, h3 { margin-top: 0; line-height: 1.08; letter-spacing: -.035em; }
+    h1 { margin: 20px 0; font-size: clamp(44px, 6.4vw, 78px); max-width: 860px; }
+    h1 span { color: #ffffff; }
+    .hero-copy > p { max-width: 720px; margin: 0; color: var(--muted); font-size: clamp(18px, 2.1vw, 21px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border-radius: 14px; padding: 0 21px; border: 1px solid transparent;
+      font-weight: 800; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary {
+      color: #fff; background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 16px 36px rgba(76,111,255,.26);
+    }
+    .button-secondary { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.035); }
+    .button-full { width: 100%; }
+    .hero-note { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; color: #f0f4f9; font-size: 13px; }
+    .hero-note span::before { content: "✓"; color: var(--secondary); font-weight: 900; margin-right: 7px; }
+
+    .hero-card {
+      position: relative; padding: 24px; border: 1px solid var(--line); border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+      box-shadow: var(--shadow);
+    }
+    .hero-card::before {
+      content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+      background: linear-gradient(135deg, rgba(109,140,255,.45), transparent 38%, rgba(104,224,193,.25));
+      filter: blur(22px); opacity: .35;
+    }
+    .analysis-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; }
+    .analysis-title { margin: 8px 0 18px; font-size: 24px; }
+    .analysis-list { display: grid; gap: 10px; }
+    .analysis-item {
+      display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start;
+      padding: 13px; border-radius: var(--radius-sm); background: rgba(5,12,23,.52); border: 1px solid rgba(255,255,255,.075);
+    }
+    .analysis-icon {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border-radius: 10px; background: rgba(109,140,255,.15); color: #cbd5ff; font-weight: 900;
+    }
+    .analysis-item strong { display: block; font-size: 14px; }
+    .analysis-item small { color: var(--muted); }
+    .mini-profile {
+      display: flex; align-items: center; gap: 12px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line);
+    }
+    .avatar {
+      flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+      color: #07111f; background: linear-gradient(135deg, #fff, var(--secondary)); font-weight: 900;
+    }
+    .mini-profile strong { display: block; }
+    .mini-profile small { color: var(--muted); }
+
+    .trust-strip { padding: 10px 0 74px; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .trust-item {
+      min-height: 92px; padding: 18px; border-radius: 16px; border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+    }
+    .trust-item strong { display: block; margin-bottom: 3px; font-size: 15px; }
+    .trust-item span { color: var(--muted); font-size: 13px; }
+
+    .section { padding: 92px 0; }
+    .section-soft { background: linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.04), rgba(255,255,255,.018)); border-block: 1px solid rgba(255,255,255,.055); }
+    .section-header { max-width: 760px; margin-bottom: 38px; }
+    .kicker { color: var(--secondary); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 850; }
+    h2 { margin-bottom: 16px; font-size: clamp(34px, 4.6vw, 56px); }
+    .section-header p { margin: 0; color: var(--muted); font-size: 18px; }
+
+    .problem-grid, .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      padding: 24px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel);
+    }
+    .card-number { color: #9eb0ff; font-weight: 900; font-size: 13px; }
+    .card h3 { margin: 13px 0 9px; font-size: 21px; }
+    .card p { margin: 0; color: var(--muted); }
+    .card:hover { background: var(--panel-strong); border-color: rgba(109,140,255,.3); }
+
+    .method-wrap { display: grid; grid-template-columns: .78fr 1.22fr; gap: 48px; align-items: start; }
+    .sticky-copy { position: sticky; top: 112px; }
+    .method-list { display: grid; gap: 15px; }
+    .method-step {
+      display: grid; grid-template-columns: 58px 1fr; gap: 18px; padding: 25px;
+      border-radius: var(--radius); border: 1px solid var(--line); background: rgba(255,255,255,.035);
+    }
+    .step-index {
+      width: 58px; height: 58px; display: grid; place-items: center; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(109,140,255,.25), rgba(104,224,193,.12));
+      color: #dce3ff; font-size: 18px; font-weight: 900;
+    }
+    .method-step h3 { margin: 3px 0 8px; font-size: 23px; }
+    .method-step p { margin: 0; color: var(--muted); }
+
+    .service-card ul, .qualification-card ul {
+      list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; color: var(--muted);
+    }
+    .service-card li, .qualification-card li { position: relative; padding-left: 22px; }
+    .service-card li::before, .qualification-card li::before {
+      content: "✓"; position: absolute; left: 0; top: 0; color: var(--secondary); font-weight: 900;
+    }
+
+    .diagnostic {
+      display: grid; grid-template-columns: 1fr .92fr; gap: 30px; padding: 34px;
+      border-radius: 30px; border: 1px solid rgba(109,140,255,.26);
+      background:
+        linear-gradient(135deg, rgba(109,140,255,.14), transparent 45%),
+        rgba(255,255,255,.045);
+      box-shadow: var(--shadow);
+    }
+    .diagnostic h2 { font-size: clamp(32px, 4.5vw, 52px); }
+    .diagnostic p { color: var(--muted); font-size: 17px; }
+    .checklist { display: grid; gap: 11px; }
+    .check {
+      display: flex; gap: 10px; align-items: flex-start; padding: 13px 15px;
+      border-radius: 14px; background: rgba(4,10,18,.4); border: 1px solid rgba(255,255,255,.07);
+    }
+    .check b { color: var(--secondary); }
+
+    .qualification-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .qualification-card.good { border-color: rgba(104,224,193,.25); }
+    .qualification-card.bad { border-color: rgba(255,211,122,.2); }
+    .qualification-card.bad li::before { content: "—"; color: var(--warning); }
+
+    .pricing {
+      display: grid; grid-template-columns: 1fr .72fr; gap: 30px; align-items: center;
+      padding: 34px; border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,.045);
+    }
+    .price { font-size: clamp(44px, 6vw, 70px); font-weight: 900; letter-spacing: -.05em; }
+    .price small { display: block; color: var(--muted); font-size: 14px; letter-spacing: 0; font-weight: 650; }
+    .pricing p { color: var(--muted); }
+    .pricing-note { padding: 18px; border-radius: 16px; background: rgba(104,224,193,.07); border: 1px solid rgba(104,224,193,.17); color: #d6fff5; }
+
+    .faq { display: grid; gap: 10px; max-width: 900px; }
+    details {
+      border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.035); overflow: hidden;
+    }
+    summary { cursor: pointer; padding: 20px 22px; font-weight: 800; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--secondary); font-size: 22px; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 0; padding: 0 22px 22px; color: var(--muted); }
+
+    .contact-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 34px; align-items: start; }
+    .contact-copy { padding-top: 12px; }
+    .contact-copy p { color: var(--muted); font-size: 17px; }
+    .contact-list { display: grid; gap: 12px; margin-top: 24px; }
+    .contact-list div { display: flex; gap: 10px; color: #d9e2ef; }
+    .contact-list b { color: var(--secondary); }
+    .lead-form {
+      padding: 26px; border-radius: 26px; border: 1px solid var(--line); background: rgba(255,255,255,.055); box-shadow: var(--shadow);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: grid; gap: 7px; }
+    .field-full { grid-column: 1 / -1; }
+    label { color: #ffffff; font-size: 13px; font-weight: 750; }
+    input, select, textarea {
+      width: 100%; color: var(--text); background: rgba(4,10,18,.62);
+      border: 1px solid rgba(255,255,255,.13); border-radius: 12px; padding: 13px 14px; outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(109,140,255,.11); }
+    select option { color: #111; }
+    textarea { resize: vertical; min-height: 105px; }
+    .consent { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 12px; margin: 14px 0; }
+    .consent input { width: auto; margin-top: 3px; }
+    .form-note { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: 12px; }
+    .hp-field {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .status-message { display: none; margin-top: 12px; padding: 12px; border-radius: 12px; background: rgba(255,211,122,.08); color: #ffe4aa; font-size: 13px; }
+
+    footer { padding: 32px 0 96px; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); font-size: 13px; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .disclaimer { max-width: 820px; margin-top: 18px; font-size: 11px; color: #c9d3e0; }
+
+    .mobile-bar {
+      display: none; position: fixed; z-index: 60; left: 12px; right: 12px; bottom: 12px;
+      padding: 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 17px;
+      background: rgba(7,17,31,.9); backdrop-filter: blur(18px); box-shadow: var(--shadow);
+    }
+    .mobile-bar .button { width: 100%; min-height: 48px; }
+
+    @media (max-width: 920px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-grid, .method-wrap, .diagnostic, .pricing, .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 62px; }
+      .hero-card { max-width: 660px; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .problem-grid, .service-grid { grid-template-columns: 1fr 1fr; }
+      .sticky-copy { position: static; }
+      .pricing { align-items: start; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .site-header .nav { min-height: 64px; }
+      .brand small { display: none; }
+      .nav-cta { padding: 9px 12px; font-size: 13px; }
+      .hero { padding: 52px 0 44px; }
+      h1 { font-size: clamp(40px, 12vw, 58px); }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .trust-grid, .problem-grid, .service-grid, .qualification-grid, .form-grid { grid-template-columns: 1fr; }
+      .field-full { grid-column: auto; }
+      .section { padding: 68px 0; }
+      .diagnostic, .pricing, .lead-form { padding: 22px; }
+      .method-step { grid-template-columns: 48px 1fr; padding: 20px; }
+      .step-index { width: 48px; height: 48px; border-radius: 14px; }
+      .footer-grid { align-items: flex-start; flex-direction: column; }
+      .mobile-bar { display: block; }
+      footer { padding-bottom: 112px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Renato Marinho — Consultoria Google Ads",
+    "description": "Consultoria Google Ads para diagnóstico, análise estratégica e otimização de campanhas.",
+    "areaServed": "BR",
+    "founder": {
+      "@type": "Person",
+      "name": "Renato Marinho"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Página inicial">
+        <span class="brand-mark">RM</span>
+        <span>Renato Marinho<small>Consultoria e Gestão Google Ads</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#metodo">Método</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#investimento">Investimento</a>
+        <a class="nav-cta" href="#diagnostico" data-track="cta_header">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Consultoria estratégica de Google Ads</span>
+          <h1><span>Entenda o que está funcionando, o que está desperdiçando verba e onde sua campanha pode evoluir.</span></h1>
+          <p>
+            Uma consultoria de Google Ads precisa ir além de apontar métricas. Eu analiso a conta para transformar buscas,
+            custos, conversões e comportamento dos leads em decisões práticas sobre o que manter, corrigir, cortar ou escalar.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#diagnostico" data-track="cta_hero_primary">Quero uma análise da minha conta →</a>
+            <a class="button button-secondary" href="#metodo" data-track="cta_hero_secondary">Entender como funciona</a>
+          </div>
+
+          <div class="hero-note" aria-label="Informações rápidas">
+            <span>Gestão a partir de R$ 1.000/mês</span>
+            <span>Análise direta comigo</span>
+            <span>Empresas de todo o Brasil</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Itens avaliados no diagnóstico">
+          <div class="analysis-label">O que eu procuro na análise</div>
+          <h2 class="analysis-title">Os pontos que mais influenciam a eficiência da conta</h2>
+
+          <div class="analysis-list">
+            <div class="analysis-item">
+              <span class="analysis-icon">01</span>
+              <div><strong>Termos e intenção</strong><small>Quais pesquisas atraem potenciais clientes e quais estão consumindo orçamento sem retorno comercial.</small></div>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">02</span>
+              <div><strong>Estrutura e anúncios</strong><small>Se campanhas, grupos, palavras, anúncios e recursos estão organizados de forma coerente com o objetivo.</small></div>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">03</span>
+              <div><strong>Orçamento e prioridades</strong><small>Onde há potencial para ganhar eficiência, cortar desperdício ou redistribuir investimento.</small></div>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">04</span>
+              <div><strong>Qualidade dos resultados</strong><small>Se as conversões registradas representam contatos que realmente têm valor para o negócio.</small></div>
+            </div>
+          </div>
+
+          <div class="mini-profile">
+            <span class="avatar" aria-hidden="true">RM</span>
+            <div><strong>Renato Marinho</strong><small>Estratégia, análise, execução e otimização direta.</small></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Especialidades">
+      <div class="container trust-grid">
+        <div class="trust-item"><strong>Google Pesquisa</strong><span>Captura de demanda com intenção comercial.</span></div>
+        <div class="trust-item"><strong>Shopping e PMax</strong><span>Estrutura para produtos, feed e e-commerce.</span></div>
+        <div class="trust-item"><strong>Diagnóstico estratégico</strong><span>Decisões baseadas no que a conta e o processo comercial realmente mostram.</span></div>
+        <div class="trust-item"><strong>Meta Ads complementar</strong><span>Geração de demanda e remarketing quando fizer sentido.</span></div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Quando a conta precisa de direção</span>
+          <h2>Mais dados não resolvem o problema se ninguém transforma os dados em decisão.</h2>
+          <p>
+            Uma consultoria útil precisa explicar por que a conta está performando daquele jeito,
+            quais hipóteses fazem sentido testar e onde existem desperdícios ou oportunidades.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="card">
+            <span class="card-number">01</span>
+            <h3>Custo subindo sem explicação</h3>
+            <p>O CPC ou o custo por lead aumentam, mas ninguém consegue apontar a causa principal e o que fazer em seguida.</p>
+          </article>
+          <article class="card">
+            <span class="card-number">02</span>
+            <h3>Muitas conversões, poucos bons contatos</h3>
+            <p>O painel parece saudável, mas o comercial recebe leads fracos ou que não avançam.</p>
+          </article>
+          <article class="card">
+            <span class="card-number">03</span>
+            <h3>Verba distribuída no automático</h3>
+            <p>Campanhas consomem orçamento sem uma lógica clara de prioridade entre termos, produtos, regiões ou objetivos.</p>
+          </article>
+          <article class="card">
+            <span class="card-number">04</span>
+            <h3>Termos ruins consumindo orçamento</h3>
+            <p>Buscas sem intenção comercial entram na conta e reduzem a eficiência do investimento.</p>
+          </article>
+          <article class="card">
+            <span class="card-number">05</span>
+            <h3>Conta estagnada</h3>
+            <p>A campanha roda há meses com poucas mudanças relevantes e sem uma agenda clara de testes.</p>
+          </article>
+          <article class="card">
+            <span class="card-number">06</span>
+            <h3>Dúvida sobre o que priorizar</h3>
+            <p>Existem várias possibilidades de otimização, mas falta decidir quais ações têm maior chance de impacto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodo">
+      <div class="container method-wrap">
+        <div class="sticky-copy section-header">
+          <span class="kicker">Meu método</span>
+          <h2>Diagnóstico primeiro. Ação depois.</h2>
+          <p>
+            A consultoria começa entendendo a conta e o negócio. Depois eu organizo os achados por prioridade,
+            impacto provável e esforço para que as próximas decisões tenham uma lógica clara.
+          </p>
+        </div>
+
+        <div class="method-list">
+          <article class="method-step">
+            <span class="step-index">01</span>
+            <div><h3>Diagnóstico da conta</h3><p>Analiso estrutura, demanda, termos de pesquisa, anúncios, orçamento, conversões e sinais comerciais.</p></div>
+          </article>
+          <article class="method-step">
+            <span class="step-index">02</span>
+            <div><h3>Priorização</h3><p>Separo o que merece correção imediata, o que precisa de teste e o que pode esperar para não mudar tudo ao mesmo tempo.</p></div>
+          </article>
+          <article class="method-step">
+            <span class="step-index">03</span>
+            <div><h3>Plano de ação</h3><p>Transformo os achados em decisões práticas: negativar, reestruturar, testar anúncios, redistribuir verba ou rever metas e conversões.</p></div>
+          </article>
+          <article class="method-step">
+            <span class="step-index">04</span>
+            <div><h3>Acompanhamento</h3><p>Quando a consultoria evolui para gestão, acompanho os efeitos das mudanças e sigo ajustando a conta conforme os dados reais.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="servicos">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Escopo</span>
+          <h2>O que pode ser analisado na consultoria.</h2>
+          <p>O escopo depende do estágio da conta, do objetivo comercial e dos problemas que precisam ser esclarecidos.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="card service-card">
+            <span class="card-number">Conta</span>
+            <h3>Estrutura e segmentação</h3>
+            <ul>
+              <li>Campanhas, grupos e palavras-chave</li>
+              <li>Correspondências e termos de pesquisa</li>
+              <li>Localização, públicos e prioridades</li>
+              <li>Distribuição de orçamento</li>
+            </ul>
+          </article>
+          <article class="card service-card">
+            <span class="card-number">Mensagem</span>
+            <h3>Anúncios e intenção</h3>
+            <ul>
+              <li>Coerência entre busca e anúncio</li>
+              <li>Diferenciação e proposta de valor</li>
+              <li>Testes de títulos e descrições</li>
+              <li>Aderência entre anúncio e página de destino</li>
+            </ul>
+          </article>
+          <article class="card service-card">
+            <span class="card-number">Resultado</span>
+            <h3>Eficiência e qualidade</h3>
+            <ul>
+              <li>CPC, CPA e conversões relevantes</li>
+              <li>Qualidade dos leads recebidos</li>
+              <li>Desperdícios e oportunidades</li>
+              <li>Plano de ação por prioridade</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container diagnostic">
+        <div>
+          <span class="kicker">Primeiro passo</span>
+          <h2>Antes de aumentar a verba, descubra onde a conta pode ganhar eficiência.</h2>
+          <p>
+            A análise busca separar sintomas de causas. O objetivo é mostrar onde existem desperdícios,
+            quais ajustes têm prioridade e o que precisa ser acompanhado depois da mudança.
+          </p>
+          <a class="button button-primary" href="#diagnostico" data-track="cta_diagnostic_block">Quero solicitar a análise →</a>
+        </div>
+
+        <div class="checklist" aria-label="Itens da análise">
+          <div class="check"><b>✓</b><span>Demanda e intenção de busca para seu serviço ou produto</span></div>
+          <div class="check"><b>✓</b><span>Possíveis falhas na conta, anúncios e termos pesquisados</span></div>
+          <div class="check"><b>✓</b><span>Aderência entre a busca, o anúncio, a oferta e a página de destino</span></div>
+          <div class="check"><b>✓</b><span>Se as conversões usadas para otimizar a conta representam ações realmente importantes</span></div>
+          <div class="check"><b>✓</b><span>Próximos passos recomendados, sem promessa milagrosa</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Qualificação</span>
+          <h2>Quando uma consultoria tende a fazer mais sentido.</h2>
+          <p>Uma boa campanha não corrige sozinha produto, atendimento, preço ou falta de capacidade comercial.</p>
+        </div>
+
+        <div class="qualification-grid">
+          <article class="card qualification-card good">
+            <h3>Faz sentido quando sua empresa...</h3>
+            <ul>
+              <li>Tem uma oferta validada e capacidade para atender novos contatos</li>
+              <li>Busca crescimento com acompanhamento de dados</li>
+              <li>Aceita testar novas mensagens, estruturas e decisões de campanha</li>
+              <li>Está disposta a investir de forma consistente</li>
+            </ul>
+          </article>
+          <article class="card qualification-card bad">
+            <h3>Provavelmente não faz sentido quando...</h3>
+            <ul>
+              <li>A expectativa é de resultado garantido ou imediato</li>
+              <li>Não existe acompanhamento dos contatos recebidos</li>
+              <li>A empresa não consegue responder rapidamente aos leads</li>
+              <li>Não existe abertura para rever oferta, atendimento ou outros gargalos quando eles limitam a campanha</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="investimento">
+      <div class="container pricing">
+        <div>
+          <span class="kicker">Investimento</span>
+          <h2>A análise pode ser o primeiro passo para uma gestão mais eficiente.</h2>
+          <p>
+            A gestão contínua começa em R$ 1.000 por mês. Quando o objetivo inicial é diagnosticar a conta,
+            o formato e o escopo da análise são definidos conforme a complexidade da operação.
+          </p>
+        </div>
+        <div>
+          <div class="price"><small>Gestão a partir de</small>R$ 1.000<small>por mês</small></div>
+          <div class="pricing-note">
+            A mídia é paga diretamente às plataformas e não está incluída na taxa de gestão.
+            A proposta detalhada é apresentada após o diagnóstico.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Dúvidas frequentes</span>
+          <h2>Antes de solicitar o diagnóstico.</h2>
+        </div>
+
+        <div class="faq">
+          <details open>
+            <summary>Consultoria e gestão são a mesma coisa?</summary>
+            <p>Não. A consultoria foca em analisar a conta, identificar problemas e organizar um plano de ação. A gestão é o acompanhamento contínuo da campanha, com execução e otimização recorrentes.</p>
+          </details>
+          <details>
+            <summary>Você pode assumir a gestão depois da análise?</summary>
+            <p>Sim. Quando fizer sentido para os dois lados, a consultoria pode evoluir para gestão contínua da conta.</p>
+          </details>
+          <details>
+            <summary>A consultoria serve para uma conta que já tem agência ou gestor?</summary>
+            <p>Sim. A análise pode funcionar como uma segunda leitura da operação, sem exigir troca imediata de fornecedor. O objetivo é entender a conta e apontar prioridades de forma objetiva.</p>
+          </details>
+          <details>
+            <summary>E se o problema estiver fora do Google Ads?</summary>
+            <p>Eu sinalizo o gargalo. Se oferta, página, atendimento ou mensuração estiverem limitando o resultado, isso precisa entrar no diagnóstico porque influencia diretamente a eficiência da campanha.</p>
+          </details>
+          <details>
+            <summary>Você garante redução de custo ou aumento de vendas?</summary>
+            <p>Não. A análise melhora a qualidade das decisões, mas resultado depende também de mercado, concorrência, oferta, investimento e processo comercial.</p>
+          </details>
+          <details>
+            <summary>Preciso já estar anunciando?</summary>
+            <p>A consultoria é mais útil quando já existem dados na conta, mas também posso analisar a estrutura planejada antes de uma nova operação entrar no ar.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diagnostico">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <span class="kicker">Solicite uma análise</span>
+          <h2>Conte o que está acontecendo na sua conta.</h2>
+          <p>
+            Preencha as informações principais da sua operação. Elas ficam registradas para eu entender o contexto
+            e, em seguida, você pode falar diretamente comigo pelo WhatsApp.
+          </p>
+
+          <div class="contact-list">
+            <div><b>✓</b><span>Sem compromisso de contratação</span></div>
+            <div><b>✓</b><span>Atendimento direto com Renato Marinho</span></div>
+            <div><b>✓</b><span>Resposta focada no contexto da sua empresa</span></div>
+          </div>
+        </div>
+
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="nome">Seu nome *</label>
+              <input id="nome" name="nome" autocomplete="name" required placeholder="Como posso te chamar?">
+            </div>
+            <div class="field">
+              <label for="empresa">Empresa *</label>
+              <input id="empresa" name="empresa" autocomplete="organization" required placeholder="Nome da empresa">
+            </div>
+            <div class="field field-full">
+              <label for="email">E-mail *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com.br">
+            </div>
+            <div class="field field-full">
+              <label for="site">Site ou Instagram</label>
+              <input id="site" name="site" inputmode="url" placeholder="https:// ou @perfil">
+            </div>
+            <div class="field">
+              <label for="canal">Situação atual *</label>
+              <select id="canal" name="canal" required>
+                <option value="">Selecione</option>
+                <option>Já anuncio no Google</option>
+                <option>Anuncio apenas no Meta</option>
+                <option>Anuncio nos dois</option>
+                <option>Ainda não anuncio</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="verba">Verba mensal em anúncios *</label>
+              <select id="verba" name="verba" required>
+                <option value="">Selecione</option>
+                <option>Ainda não definida</option>
+                <option>Até R$ 2.000</option>
+                <option>R$ 2.001 a R$ 4.000</option>
+                <option>R$ 4.001 a R$ 10.000</option>
+                <option>R$ 10.001 a R$ 30.000</option>
+                <option>Acima de R$ 30.000</option>
+              </select>
+            </div>
+            <div class="field field-full">
+              <label for="objetivo">Qual é o principal objetivo ou dificuldade? *</label>
+              <textarea id="objetivo" name="objetivo" required placeholder="Ex.: gerar orçamentos, melhorar a qualidade dos leads, vender mais no e-commerce..."></textarea>
+            </div>
+          </div>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="website_check">Deixe este campo vazio</label>
+            <input id="website_check" name="website_check" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" id="consentimento" required>
+            <span>Concordo em fornecer estas informações para receber contato sobre a análise solicitada. Consulte a <a href="https://solucoesmarinho.com.br/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+          </label>
+
+          <button class="button button-primary button-full" type="submit" data-track="form_submit">
+            Solicitar análise da minha conta →
+          </button>
+
+          <div class="status-message" id="statusMessage" role="alert"></div>
+          <p class="form-note">Seus dados não devem ser vendidos ou compartilhados para publicidade de terceiros.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <strong style="color:#fff">Renato Marinho</strong><br>
+          Criação, análise e otimização de campanhas de Google Ads.
+        </div>
+        <div class="footer-links">
+          <a href="mailto:contato@solucoesmarinho.com.br">contato@solucoesmarinho.com.br</a>
+          <a href="https://solucoesmarinho.com.br/privacidade.html">Política de Privacidade</a>
+          <a href="#inicio">Voltar ao topo</a>
+        </div>
+      </div>
+      <p class="disclaimer">
+        © <span id="year"></span> Renato Marinho. Resultados variam conforme mercado, oferta, investimento,
+        concorrência, atendimento e processo comercial. Esta página não representa garantia de vendas ou retorno financeiro.
+      </p>
+    </div>
+  </footer>
+
+  <div class="mobile-bar" aria-label="Ação rápida">
+    <a class="button button-primary" href="#diagnostico" data-track="cta_mobile">Solicitar diagnóstico</a>
+  </div>
+
+  <script>
+    // ==============================
+    // CONFIGURE_AQUI
+    // Use apenas números, com DDI e DDD. Exemplo MS: 5567999999999
+    // ==============================
+    const WHATSAPP_NUMBER = "5567999076005";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfmsAAFsKwUM-ytPhuVIeqDdxpWl_FghqlNA9mGzsU8QacM4d_6ofcIZEXE9AOcfxI/exec";
+
+    const dataLayer = window.dataLayer = window.dataLayer || [];
+
+    function track(eventName, extra = {}) {
+      dataLayer.push({ event: eventName, ...extra });
+    }
+
+    document.querySelectorAll("[data-track]").forEach((element) => {
+      element.addEventListener("click", () => {
+        track("cta_click", { cta_name: element.dataset.track });
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const attribution = {
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_term: params.get("utm_term") || "",
+      utm_content: params.get("utm_content") || "",
+      gclid: params.get("gclid") || ""
+    };
+
+    const form = document.getElementById("leadForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      statusMessage.style.display = "none";
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!/^\d{12,15}$/.test(WHATSAPP_NUMBER)) {
+        statusMessage.textContent = "O número do WhatsApp ainda não foi configurado corretamente.";
+        statusMessage.style.display = "block";
+        return;
+      }
+
+      const fields = new FormData(form);
+
+      // Campo invisível anti-spam. Visitantes reais não o preenchem.
+      if (fields.get("website_check")) {
+        return;
+      }
+
+      const payload = new URLSearchParams({
+        nome: fields.get("nome") || "",
+        empresa: fields.get("empresa") || "",
+        email: fields.get("email") || "",
+        site: fields.get("site") || "",
+        canal: fields.get("canal") || "",
+        verba: fields.get("verba") || "",
+        objetivo: fields.get("objetivo") || "",
+        utm_source: attribution.utm_source,
+        utm_medium: attribution.utm_medium,
+        utm_campaign: attribution.utm_campaign,
+        utm_term: attribution.utm_term,
+        utm_content: attribution.utm_content,
+        gclid: attribution.gclid,
+        pagina: window.location.href.split("#")[0],
+        lp_origem: "consultoria-google-ads",
+        website_check: ""
+      });
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Registrando informações...";
+
+      track("generate_lead", {
+        form_name: "consultoria_google_ads",
+        monthly_budget: fields.get("verba"),
+        current_channel: fields.get("canal")
+      });
+
+      fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          body: payload.toString(),
+          keepalive: true
+        }).catch((error) => {
+          console.error("Falha ao registrar o lead na planilha:", error);
+        });
+
+      const whatsappMessage =
+        "Olá, Renato! Vim pela página de consultoria Google Ads e gostaria de conversar sobre a análise da minha conta.";
+
+      const whatsappUrl =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+
+      window.location.href = whatsappUrl;
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
