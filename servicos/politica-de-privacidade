@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidade | Renato Marinho</title>
+  <meta name="description" content="Política de privacidade da página de serviços de Renato Marinho.">
+  <style>
+    :root { --bg:#07111f; --panel:#0d1a2c; --text:#f5f8ff; --muted:#afbdd0; --line:rgba(255,255,255,.12); --primary:#6d8cff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.7; }
+    main { width:min(calc(100% - 32px),860px); margin:48px auto; padding:34px; border:1px solid var(--line); border-radius:24px; background:var(--panel); }
+    h1,h2 { line-height:1.15; letter-spacing:-.025em; }
+    h1 { font-size:clamp(36px,6vw,58px); margin-top:0; }
+    h2 { margin-top:32px; }
+    p,li { color:var(--muted); }
+    a { color:#aebcff; }
+    .notice { padding:16px; border:1px solid rgba(255,211,122,.25); border-radius:14px; color:#ffe6b0; background:rgba(255,211,122,.07); }
+    .back { display:inline-block; margin-bottom:24px; color:#fff; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="https://solucoesmarinho.com.br/">← Voltar para a página principal</a>
+    <h1>Política de Privacidade</h1>
+
+        <p>Última atualização: 6 de agosto de 2026.</p>
+
+    <h2>1. Responsável pelo tratamento</h2>
+    <p>O responsável por esta página é Renato Marinho. Para solicitações relacionadas a dados pessoais, utilize o e-mail <a href="mailto:contato@solucoesmarinho.com.br">contato@solucoesmarinho.com.br</a>.</p>
+
+    <h2>2. Dados fornecidos pelo visitante</h2>
+    <p>Ao solicitar contato, o visitante pode fornecer nome, empresa, e-mail, site ou perfil, situação atual de publicidade, faixa de investimento e uma descrição de seus objetivos ou dificuldades.</p>
+
+    <h2>3. Finalidades</h2>
+    <ul>
+      <li>Responder à solicitação de análise ou contato;</li>
+      <li>Entender o contexto comercial informado;</li>
+      <li>Preparar proposta, diagnóstico ou orientação relacionada ao serviço solicitado;</li>
+      <li>Manter registros necessários ao atendimento e à segurança.</li>
+    </ul>
+
+    <h2>4. WhatsApp</h2>
+    <p>O formulário desta página pode abrir uma conversa no WhatsApp com as informações preenchidas. Ao prosseguir, o visitante também estará sujeito aos termos e políticas da plataforma utilizada.</p>
+
+    <h2>5. Dados de navegação e publicidade</h2>
+    <p>Quando ferramentas como Google Analytics, Google Tag Manager, Google Ads ou Meta forem instaladas, esta política deverá ser atualizada para explicar cookies, identificadores, finalidade, duração e mecanismos de consentimento aplicáveis.</p>
+
+    <h2>6. Compartilhamento</h2>
+    <p>Os dados podem ser processados por fornecedores estritamente necessários ao funcionamento do site, comunicação, hospedagem, mensuração ou publicidade. Os dados não devem ser vendidos a terceiros.</p>
+
+    <h2>7. Retenção e segurança</h2>
+    <p>As informações são mantidas pelo período necessário ao atendimento, cumprimento de obrigações legais e proteção de direitos, com medidas razoáveis de segurança.</p>
+
+    <h2>8. Direitos do titular</h2>
+    <p>O titular pode solicitar confirmação de tratamento, acesso, correção, eliminação quando aplicável, informação sobre compartilhamento e revogação de consentimento, conforme a legislação brasileira.</p>
+
+    <h2>9. Atualizações</h2>
+    <p>Esta política pode ser atualizada quando houver alterações no site, nas ferramentas utilizadas ou nas práticas de tratamento de dados.</p>
+  </main>
+</body>
+</html>
