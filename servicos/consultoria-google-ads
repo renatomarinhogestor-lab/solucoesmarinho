@@ -277,7 +277,199 @@
     }
     .mobile-bar .button { width: 100%; min-height: 48px; }
 
+
+    .consulting-delivery {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .delivery-copy p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .deliverable-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .deliverable {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .deliverable-index {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-weight: 900;
+      color: #07111f;
+      background: linear-gradient(135deg, #ffffff, var(--secondary));
+    }
+
+    .deliverable strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .deliverable span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .consulting-visual {
+      padding: 12px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+      box-shadow: var(--shadow);
+    }
+
+    .consulting-visual img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+
+    .visual-caption {
+      padding: 11px 5px 2px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 34px;
+      position: relative;
+    }
+
+    .process-step {
+      position: relative;
+      min-height: 150px;
+      padding: 20px 17px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .process-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--secondary);
+      background: var(--bg);
+      font-weight: 900;
+    }
+
+    .process-number {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .process-step h3 {
+      margin: 10px 0 7px;
+      font-size: 18px;
+    }
+
+    .process-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .analysis-showcase {
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .analysis-showcase-copy p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .analysis-bullets {
+      display: grid;
+      gap: 11px;
+      margin-top: 20px;
+    }
+
+    .analysis-bullets div {
+      padding: 13px 15px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--line);
+      color: #eef4fb;
+    }
+
+    .analysis-bullets b {
+      color: var(--secondary);
+      margin-right: 8px;
+    }
+
+    .consulting-investment {
+      display: grid;
+      grid-template-columns: 1fr .82fr;
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+    }
+
+    .consulting-investment p {
+      color: var(--muted);
+    }
+
+    .scope-card {
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(104,224,193,.22);
+      background: rgba(104,224,193,.065);
+    }
+
+    .scope-card strong {
+      display: block;
+      color: #ffffff;
+      font-size: 20px;
+      margin-bottom: 7px;
+    }
+
+    .scope-card span {
+      color: #d8fff5;
+      font-size: 14px;
+    }
+
     @media (max-width: 920px) {
+      .consulting-delivery, .analysis-showcase, .consulting-investment { grid-template-columns: 1fr; }
+      .process-flow { grid-template-columns: 1fr 1fr; }
+      .process-step:not(:last-child)::after { display: none; }
       .nav-links a:not(.nav-cta) { display: none; }
       .hero-grid, .method-wrap, .diagnostic, .pricing, .contact-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 62px; }
@@ -297,6 +489,7 @@
       h1 { font-size: clamp(40px, 12vw, 58px); }
       .hero-actions { display: grid; }
       .button { width: 100%; }
+      .process-flow { grid-template-columns: 1fr; }
       .trust-grid, .problem-grid, .service-grid, .qualification-grid, .form-grid { grid-template-columns: 1fr; }
       .field-full { grid-column: auto; }
       .section { padding: 68px 0; }
@@ -364,7 +557,7 @@
           </div>
 
           <div class="hero-note" aria-label="Informações rápidas">
-            <span>Gestão a partir de R$ 1.000/mês</span>
+            <span>Consultoria com escopo definido</span>
             <span>Análise direta comigo</span>
             <span>Empresas de todo o Brasil</span>
           </div>
@@ -488,7 +681,82 @@
       </div>
     </section>
 
-    <section class="section section-soft" id="servicos">
+    
+    <section class="section section-soft" id="como-e-entregue">
+      <div class="container">
+        <div class="consulting-delivery">
+          <div class="delivery-copy">
+            <span class="kicker">Como a consultoria é entregue</span>
+            <h2>Você termina a análise sabendo o que corrigir, em que ordem e por quê.</h2>
+            <p>
+              A consultoria não termina em uma conversa genérica. O objetivo é transformar a leitura da conta
+              em um diagnóstico claro, documentado e utilizável por você, pelo seu time ou pelo profissional que já gerencia as campanhas.
+            </p>
+
+            <div class="deliverable-list">
+              <div class="deliverable">
+                <span class="deliverable-index">01</span>
+                <div><strong>Diagnóstico da conta</strong><span>Leitura dos principais gargalos, desperdícios, oportunidades e pontos que precisam de validação.</span></div>
+              </div>
+              <div class="deliverable">
+                <span class="deliverable-index">02</span>
+                <div><strong>Relatório estruturado em PDF</strong><span>Material organizado com os achados relevantes, evidências e recomendações práticas.</span></div>
+              </div>
+              <div class="deliverable">
+                <span class="deliverable-index">03</span>
+                <div><strong>Reunião de apresentação</strong><span>Encontro para explicar o diagnóstico, discutir prioridades e esclarecer dúvidas.</span></div>
+              </div>
+              <div class="deliverable">
+                <span class="deliverable-index">04</span>
+                <div><strong>Plano de ação priorizado</strong><span>Orientação sobre o que corrigir primeiro, o que testar depois e o que acompanhar.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <figure class="consulting-visual">
+            <img
+              src="/assets/img/consultoria/diagnostico-google-ads.webp"
+              alt="Exemplo visual de relatório de diagnóstico de uma conta de Google Ads"
+              loading="lazy"
+              width="1536"
+              height="1024">
+            <figcaption class="visual-caption">
+              Exemplo ilustrativo do formato de apresentação do diagnóstico. Os dados exibidos são demonstrativos.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="process-flow" aria-label="Etapas da consultoria">
+          <article class="process-step">
+            <span class="process-number">Etapa 1</span>
+            <h3>Levantamento</h3>
+            <p>Entendo objetivo, contexto comercial e principais dúvidas sobre a conta.</p>
+          </article>
+          <article class="process-step">
+            <span class="process-number">Etapa 2</span>
+            <h3>Análise</h3>
+            <p>Reviso estrutura, buscas, anúncios, orçamento, conversões e sinais de qualidade.</p>
+          </article>
+          <article class="process-step">
+            <span class="process-number">Etapa 3</span>
+            <h3>Relatório</h3>
+            <p>Organizo os achados e recomendações em um material estruturado.</p>
+          </article>
+          <article class="process-step">
+            <span class="process-number">Etapa 4</span>
+            <h3>Reunião</h3>
+            <p>Apresento o diagnóstico e explico o raciocínio por trás das prioridades.</p>
+          </article>
+          <article class="process-step">
+            <span class="process-number">Etapa 5</span>
+            <h3>Plano de ação</h3>
+            <p>Você sai com uma ordem prática para correções, testes e acompanhamento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section class="section section-soft" id="servicos">
       <div class="container">
         <div class="section-header">
           <span class="kicker">Escopo</span>
@@ -531,7 +799,39 @@
       </div>
     </section>
 
+    
     <section class="section">
+      <div class="container analysis-showcase">
+        <figure class="consulting-visual">
+          <img
+            src="/assets/img/consultoria/painel-analise-google-ads.webp"
+            alt="Exemplo visual de painel de análise estratégica de campanhas Google Ads"
+            loading="lazy"
+            width="1536"
+            height="1024">
+          <figcaption class="visual-caption">
+            Exemplo ilustrativo de como diferentes sinais podem ser consolidados para orientar decisões.
+          </figcaption>
+        </figure>
+
+        <div class="analysis-showcase-copy">
+          <span class="kicker">Análise com contexto</span>
+          <h2>O objetivo não é gerar mais gráficos. É saber o que fazer com eles.</h2>
+          <p>
+            Métricas isoladas podem induzir a decisões ruins. Na consultoria, eu cruzo o comportamento da conta
+            com a intenção das buscas, distribuição de verba e qualidade das conversões para chegar a recomendações práticas.
+          </p>
+          <div class="analysis-bullets">
+            <div><b>✓</b>O que está consumindo verba sem justificar o investimento</div>
+            <div><b>✓</b>Onde existe espaço para redistribuir orçamento</div>
+            <div><b>✓</b>Quais campanhas, anúncios ou termos merecem teste</div>
+            <div><b>✓</b>Quais métricas parecem boas no painel, mas não representam qualidade comercial</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section">
       <div class="container diagnostic">
         <div>
           <span class="kicker">Primeiro passo</span>
@@ -585,22 +885,31 @@
     </section>
 
     <section class="section" id="investimento">
-      <div class="container pricing">
+      <div class="container consulting-investment">
         <div>
           <span class="kicker">Investimento</span>
-          <h2>A análise pode ser o primeiro passo para uma gestão mais eficiente.</h2>
+          <h2>O valor depende do tamanho e da complexidade da análise.</h2>
           <p>
-            A gestão contínua começa em R$ 1.000 por mês. Quando o objetivo inicial é diagnosticar a conta,
-            o formato e o escopo da análise são definidos conforme a complexidade da operação.
+            Uma conta com poucas campanhas exige uma profundidade diferente de uma operação com vários produtos,
+            regiões, históricos e objetivos. Por isso, eu prefiro entender o cenário antes de definir um valor.
           </p>
+          <p>
+            Você recebe uma proposta clara para a consultoria, com escopo definido antes do início.
+            Não há obrigação de contratar gestão mensal depois.
+          </p>
+          <a class="button button-primary" href="#diagnostico" data-track="cta_investimento_consultoria">
+            Solicitar análise da minha conta →
+          </a>
         </div>
-        <div>
-          <div class="price"><small>Gestão a partir de</small>R$ 1.000<small>por mês</small></div>
-          <div class="pricing-note">
-            A mídia é paga diretamente às plataformas e não está incluída na taxa de gestão.
-            A proposta detalhada é apresentada após o diagnóstico.
-          </div>
-        </div>
+
+        <aside class="scope-card">
+          <strong>Consultoria sob medida</strong>
+          <span>
+            O formato é definido conforme a quantidade de campanhas, histórico disponível,
+            profundidade necessária e objetivo da análise. Se depois fizer sentido continuar,
+            a gestão recorrente pode ser contratada separadamente.
+          </span>
+        </aside>
       </div>
     </section>
 
