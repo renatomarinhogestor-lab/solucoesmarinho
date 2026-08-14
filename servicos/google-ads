@@ -720,7 +720,7 @@
 
           <label class="consent">
             <input type="checkbox" id="consentimento" required>
-            <span>Concordo em fornecer estas informações para receber contato sobre a análise solicitada. Consulte a <a href="https://solucoesmarinho.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+            <span>Concordo em fornecer estas informações para receber contato sobre a análise solicitada. Consulte a <a href="https://solucoesmarinho.com.br/servicos/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
           </label>
 
           <button class="button button-primary button-full" type="submit" data-track="form_submit">
